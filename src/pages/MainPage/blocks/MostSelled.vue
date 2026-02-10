@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import image1 from "../assets/selled_product_1.svg"
-import image2 from "../assets/selled_product_2.svg"
-import image3 from "../assets/selled_product_3.svg"
-import image4 from "../assets/selled_product_4.svg"
+import image1 from "../../../assets/selled_product_1.svg"
+import image2 from "../../../assets/selled_product_2.svg"
+import image3 from "../../../assets/selled_product_3.svg"
+import image4 from "../../../assets/selled_product_4.svg"
 const items = ref([
     {
         image: image1,
@@ -43,7 +43,7 @@ const items = ref([
         </div>
         <div class="grid grid-cols-4 gap-12">
             <div v-for="(item, index) in items" :key="index"    
-                class="flex flex-col gap-1 justify-between rounded-2xl text-left px-1 cursor-pointer hover:shadow-xl"
+                class="flex flex-col gap-1 justify-between rounded-2xl text-left px-1 cursor-pointer hover:shadow-sm"
             >
                 <img :src="item.image" :alt="item.name">
                 <span class="font-bold">{{ item.name }}</span>

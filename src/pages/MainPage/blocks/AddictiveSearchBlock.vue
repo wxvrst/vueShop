@@ -47,9 +47,9 @@ const items = ref([
                 Look for anything else?
             </span>
             <div class="relative w-full">
-                <input type="search" placeholder="Search keyboard"
+                <input type="" placeholder="Search keyboard"
                     class="border py-3 px-12 w-1/2 rounded-4xl border-[#C5C5C5] outline-none hover:border-[#888888] focus:border-[#888888]">
-                <img src="../assets/search_icon.svg" alt="seatch icon" class="absolute left-10/39 top-3">
+                <img src="../../../assets/search_icon.svg" alt="seatch icon" class="absolute left-10/39 top-3">
                 </input>
             </div>
             <div class="flex flex-wrap gap-2 w-1/2 justify-center">
@@ -57,6 +57,23 @@ const items = ref([
                     class="border border-[#C5C5C5] rounded-4xl py-2 px-6 hover:border-[#888888]">
                     {{ item.title }}
                 </router-link>
+            </div>
+        </div>
+        <div class="bg-[#DCE5E2] rounded-2xl gap-4 flex flex-col justify-center items-center py-12">
+            <span class="text-6xl">
+                Never miss a thing
+            </span>
+            <span class="w-1/2">
+                Sign up for texts to be notified about our best offers on the perfect gifts.
+            </span>
+            <img src="../../../assets/search_block_image.svg" alt="picture">
+            <div>
+                <input type="" placeholder="Your email"
+                    class="border-y border-l rounded-y-4xl rounded-l-4xl py-3 px-8 outline-none "
+                >
+                <button
+                    class="bg-black text-white border-black border-y border-r rounded-y-4xl rounded-r-4xl py-3 px-8 cursor-pointer"
+                >Sign Up</button>
             </div>
         </div>
     </section>
