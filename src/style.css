@@ -1,29 +1,32 @@
 @import "tailwindcss";
 
 :root {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
-    font-weight: 100;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.5;
+	font-weight: 100;
 
-    color: #000000;
-    background-color: #ffffff;
+	color: #000000;
+	background-color: #ffffff;
 
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
+button {
+	cursor: pointer;
+}
 ::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+	width: 0;
+	background: transparent;
 }
 
 #app {
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-    min-width: 320px;
-    max-width: 1294px;
-    min-height: 100vh;
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+	min-width: 320px;
+	max-width: 1294px;
+	min-height: 100vh;
 }
