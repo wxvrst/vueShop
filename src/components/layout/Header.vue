@@ -12,6 +12,9 @@
 			<router-link to="/support">SUPPORT</router-link>
 		</div>
 		<div class="flex gap-4">
+			<router-link to="/favorite">
+				<img src="../../assets/favorite_icon.svg" alt="favorite icon" class="w-8 relative -top-0.5">
+			</router-link>
 			<router-link to="/search"
 				><img src="../../assets/search_icon.svg" alt="search icon"
 			/></router-link>

@@ -3,12 +3,14 @@ import CartCard from "../../components/ui/CartCard.vue";
 import { useCartStore } from "../../store/cart";
 
 const cartStore = useCartStore();
-const clearCartHandler = () => {};
+const clearCartHandler = () => {
+	cartStore.clearCart();
+};
 </script>
 <template>
-	<section class="border border-[#c5c5c5] rounded-xl flex gap-6 m-6">
-		<div class="p-4 text-left">
-			<div class="flex justify-between">
+	<section class="flex gap-6 m-6">
+		<div class="w-full border border-[#c5c5c5] rounded p-4 text-left">
+			<div class="flex justify-between mb-2">
 				<span>
 					<span class="font-bold text-2xl">Cart: </span>
 					<span class="text-gray-600"
@@ -18,15 +20,31 @@ const clearCartHandler = () => {};
 						}}</span
 					>
 				</span>
-				<button @click="clearCartHandler"></button>
+				<button
+					@click="clearCartHandler"
+					class="border rounded-lg py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400"
+				>
+					Clear Cart
+				</button>
 			</div>
-			<div class="flex flex-col gap-2">
+			<div class="flex flex-col gap-4">
 				<CartCard
 					v-for="product in cartStore.cart"
 					:key="product.id"
 					:product="product"
 				></CartCard>
 			</div>
+		</div>
+		<div
+			class="w-1/4 flex flex-col gap-4 border border-[#c5c5c5] rounded p-4 text-center h-fit items-center"
+		>
+			<span class="text-2xl">Submit order</span>
+			{{
+				cartStore.cartCount
+					? `${cartStore.cartTotal} $ in total`
+					: "No products in cart"
+			}}
+			<button @click="" class="border rounded-lg py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400">Submit order</button>
 		</div>
 	</section>
 </template>

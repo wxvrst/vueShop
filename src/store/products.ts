@@ -7,7 +7,7 @@ export const useProductStore = defineStore("products", () => {
 	const products = ref<Product[]>([]);
 	const categories = ref<Category[]>([]);
 	const searchResult = ref<Product[]>([]);
-	
+
 	const search = ref<string>("");
 	const loading = ref<boolean>(false);
 
@@ -56,6 +56,7 @@ export const useProductStore = defineStore("products", () => {
 	};
 
 	const fetchCategories = async () => {
+		currentPage.value = 0;
 		categories.value = [];
 		try {
 			const responce = await fetch(`${apiBaseUrl}/products/categories`);
@@ -68,7 +69,7 @@ export const useProductStore = defineStore("products", () => {
 	};
 
 	const searchProducts = async (query: string) => {
-		search.value=''
+		search.value = "";
 		if (!query) {
 			searchResult.value = [];
 			return;
@@ -87,7 +88,7 @@ export const useProductStore = defineStore("products", () => {
 		}
 	};
 	const searchCategory = async (category: string) => {
-		search.value=''
+		search.value = "";
 		if (!category) {
 			searchResult.value = [];
 			return;
@@ -110,7 +111,7 @@ export const useProductStore = defineStore("products", () => {
 		return search.value ? searchResult.value : products.value;
 	});
 
-	return{
+	return {
 		products,
 		searchResult,
 		categories,
