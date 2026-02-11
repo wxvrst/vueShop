@@ -30,12 +30,14 @@ onMounted(() => {
 	productStore.fetchProducts();
 	productStore.fetchCategories();
 });
+
 const handleSearch = (search: string) => {
 	productStore.searchProducts(search);
+	//дебаунс
 };
+
 const categoryChangeHandler = (slug: string) => {
 	search.value = "";
-	//TODO: rewrite, remove empty result after another category select
 	if (selectedCategory.value != slug) {
 		selectedCategory.value = slug;
 	} else {
@@ -67,7 +69,7 @@ const categoryChangeHandler = (slug: string) => {
 		</button>
 	</div>
 	<section class="grid grid-cols-4 gap-4">
-		<p v-if="productStore.loading">Products loading...</p>
+		<p v-if="productStore.isLoading">Products loading...</p>
 		<ProductCard
 			v-for="product in productStore.currentProducts"
 			:product="product"

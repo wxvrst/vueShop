@@ -33,7 +33,7 @@ const addToCartHandler = (product: Product) => {
 		<div
 			class="flex flex-col justify-between min-h-120 p-2 gap-1 rounded-2xl text-left hover:shadow-sm"
 		>
-			<img :src="product.thumbnail" :alt="product.title" class="w-full" />
+			<img :src="product.thumbnail" :alt="product.title" class="w-fit" />
 			<div class="flex flex-col gap-2">
 				<span class="font-bold cursor-pointer">{{
 					product.title

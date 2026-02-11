@@ -2,8 +2,8 @@
 import { useCartStore } from "../../store/cart";
 import { userFavoriteStore } from "../../store/favorite";
 import type { CartItem } from "../../types/types";
-import favoriteTrue from '../../assets/favorite_icon_1.svg'
-import favoriteFalse from '../../assets/favorite_icon_0.svg'
+import favoriteTrue from "../../assets/favorite_icon_1.svg";
+import favoriteFalse from "../../assets/favorite_icon_0.svg";
 const props = defineProps<{
 	product: CartItem;
 }>();
@@ -79,7 +79,7 @@ const addToFavoriteHandler = (product: CartItem) => {
 					/>
 				</button>
 			</div>
-			<span class="self-start w-24"
+			<span class="self-start w-32"
 				>{{ (product.price * product.quantity).toFixed(2) }} $</span
 			>
 		</div>

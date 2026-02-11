@@ -3,7 +3,7 @@ import CartCard from "../../components/ui/CartCard.vue";
 import { useCartStore } from "../../store/cart";
 
 const cartStore = useCartStore();
-const clearCartHandler = () => {
+const handleClearCart = () => {
 	cartStore.clearCart();
 };
 </script>
@@ -21,7 +21,7 @@ const clearCartHandler = () => {
 					>
 				</span>
 				<button
-					@click="clearCartHandler"
+					@click="handleClearCart"
 					class="border rounded-lg py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400"
 				>
 					Clear Cart
@@ -29,7 +29,7 @@ const clearCartHandler = () => {
 			</div>
 			<div class="flex flex-col gap-4">
 				<CartCard
-					v-for="product in cartStore.cart"
+					v-for="product in cartStore.cartList"
 					:key="product.id"
 					:product="product"
 				></CartCard>
@@ -44,7 +44,12 @@ const clearCartHandler = () => {
 					? `${cartStore.cartTotal} $ in total`
 					: "No products in cart"
 			}}
-			<button @click="" class="border rounded-lg py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400">Submit order</button>
+			<button
+				@click=""
+				class="border rounded-lg py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400"
+			>
+				Submit order
+			</button>
 		</div>
 	</section>
 </template>

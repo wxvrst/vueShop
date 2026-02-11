@@ -3,23 +3,27 @@ import type { Product } from "../types/types";
 import { ref } from "vue";
 
 export const userFavoriteStore = defineStore("facorite", () => {
-	const favorite = ref<Product[]>([]);
+	const favoriteList = ref<Product[]>([]);
+	const favoriteCount = ref<number>(0);
 
 	const isInFavorite = (product: Product) => {
-		return favorite.value.find((item) => item.id == product.id);
+		return favoriteList.value.find((item) => item.id == product.id);
 	};
 	const toggleFavorite = (product: Product) => {
-		const item = favorite.value.find((item) => item.id == product.id);
+		const item = favoriteList.value.find((item) => item.id == product.id);
 		if (item) {
-			favorite.value = favorite.value.filter(
+			favoriteList.value = favoriteList.value.filter(
 				(item) => item.id != product.id,
 			);
+			favoriteCount.value--;
 		} else {
-			favorite.value.push({ ...product });
+			favoriteCount.value++;
+			favoriteList.value.push({ ...product });
 		}
 	};
 	return {
-		favorite,
+		favoriteList,
+		favoriteCount,
 		toggleFavorite,
 		isInFavorite,
 	};

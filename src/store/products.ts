@@ -1,15 +1,23 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import type { Product, Category } from "../types/types";
-const apiBaseUrl = "https://dummyjson.com";
-
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 export const useProductStore = defineStore("products", () => {
 	const products = ref<Product[]>([]);
 	const categories = ref<Category[]>([]);
 	const searchResult = ref<Product[]>([]);
-
+	//searchResult как переменную внутри fetch
 	const search = ref<string>("");
-	const loading = ref<boolean>(false);
+	const isLoading = ref<boolean>(false);
+	// const error = ref<string>("");
+
+	//Объединить параметры в один объект, search, category в params, и сразу их брать в компонентах, а не создавать локальные
+	//axios добавить
+	//пересмотреть места строк, импорты компьютеды и тд
+	//Динамический import
+	//дебаунс
+
+	//FSD архитектура
 
 	//Pagination
 	const pageSize = ref<number>(20);
@@ -27,7 +35,7 @@ export const useProductStore = defineStore("products", () => {
 		limit: number = pageSize.value,
 	) => {
 		products.value = [];
-		loading.value = true;
+		isLoading.value = true;
 		try {
 			const skip = page * limit;
 			const responce = await fetch(
@@ -41,7 +49,7 @@ export const useProductStore = defineStore("products", () => {
 		} catch (err) {
 			console.error(err);
 		} finally {
-			loading.value = false;
+			isLoading.value = false;
 		}
 	};
 	const nextPage = () => {
@@ -89,6 +97,7 @@ export const useProductStore = defineStore("products", () => {
 	};
 	const searchCategory = async (category: string) => {
 		search.value = "";
+		isLoading.value = true;
 		if (!category) {
 			searchResult.value = [];
 			return;
@@ -104,6 +113,8 @@ export const useProductStore = defineStore("products", () => {
 		} catch (err) {
 			console.error(err);
 			searchResult.value = [];
+		} finally {
+			isLoading.value = false;
 		}
 	};
 
@@ -115,7 +126,7 @@ export const useProductStore = defineStore("products", () => {
 		products,
 		searchResult,
 		categories,
-		loading,
+		isLoading,
 		currentProducts,
 		hasNextPage,
 		hasPrevPage,
