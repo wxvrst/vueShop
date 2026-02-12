@@ -1,140 +1,131 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import type { Product, Category } from "../types/types";
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+import { watchDebounced } from "@vueuse/core";
+import type { Product, Category, Params, FetchParams } from "../types/types";
+import apiProduct from "../services/api";
 export const useProductStore = defineStore("products", () => {
-	const products = ref<Product[]>([]);
-	const categories = ref<Category[]>([]);
-	const searchResult = ref<Product[]>([]);
-	//searchResult как переменную внутри fetch
-	const search = ref<string>("");
-	const isLoading = ref<boolean>(false);
-	// const error = ref<string>("");
+  const products = ref<Product[]>([]);
+  const categories = ref<Category[]>([]);
 
-	//Объединить параметры в один объект, search, category в params, и сразу их брать в компонентах, а не создавать локальные
-	//axios добавить
-	//пересмотреть места строк, импорты компьютеды и тд
-	//Динамический import
-	//дебаунс
+  const params = ref<Params>({
+    search: "",
+    category: "",
+    page: 0,
+    limit: 20,
+  });
 
-	//FSD архитектура
+  const isLoading = ref<boolean>(false);
+  const error = ref<string | null>(null);
+  const totalProducts = ref<number>(0);
 
-	//Pagination
-	const pageSize = ref<number>(20);
-	const currentPage = ref<number>(0);
-	const totalProducts = ref<number>(0);
+  const totalPages = computed(() => {
+    return Math.ceil(totalProducts.value / params.value.limit);
+  });
+  const hasPrevPage = computed(() => params.value.page > 0);
+  const hasNextPage = computed(() => params.value.page < totalPages.value);
 
-	const totalPages = computed(() => {
-		return Math.ceil(totalProducts.value / pageSize.value);
-	});
-	const hasPrevPage = computed(() => currentPage.value > 0);
-	const hasNextPage = computed(() => currentPage.value < totalPages.value);
+  watchDebounced(
+    params,
+    async () => {
+      fetchProducts();
+    },
+    { debounce: 400 },
+  );
 
-	const fetchProducts = async (
-		page: number = currentPage.value,
-		limit: number = pageSize.value,
-	) => {
-		products.value = [];
-		isLoading.value = true;
-		try {
-			const skip = page * limit;
-			const responce = await fetch(
-				`${apiBaseUrl}/products/?limit=${limit}&skip=${skip}`,
-			);
-			if (!responce.ok) throw new Error("Api answer error");
-			const data = await responce.json();
-			products.value = data.products;
-			totalProducts.value = data.total;
-			currentPage.value = page;
-		} catch (err) {
-			console.error(err);
-		} finally {
-			isLoading.value = false;
-		}
-	};
-	const nextPage = () => {
-		if (hasNextPage) {
-			fetchProducts(currentPage.value + 1);
-		}
-	};
-	const prevPage = () => {
-		if (hasPrevPage) {
-			fetchProducts(currentPage.value - 1);
-		}
-	};
+  const fetchProducts = async () => {
+    products.value = [];
+    isLoading.value = true;
+    error.value = null;
 
-	const fetchCategories = async () => {
-		currentPage.value = 0;
-		categories.value = [];
-		try {
-			const responce = await fetch(`${apiBaseUrl}/products/categories`);
-			if (!responce.ok) throw new Error("Api answer error");
-			const data = await responce.json();
-			categories.value = data;
-		} catch (err) {
-			console.error(err);
-		}
-	};
+    try {
+      let endpoint = "/";
+      let queryParams: FetchParams | {} = {};
+      if (params.value.search != "") {
+        endpoint = `/search?q=${encodeURIComponent(params.value.search)}`;
+      } else if (params.value.category != "") {
+        endpoint = `/category/${encodeURIComponent(params.value.category)}`;
+      } else {
+        queryParams = {
+          limit: params.value.limit,
+          skip: params.value.limit * params.value.page,
+        };
+      }
+      const responce = await apiProduct.get(endpoint, { params: queryParams });
+      products.value = responce.data.products;
+      totalProducts.value = responce.data.total;
+    } catch (err) {
+      error.value = (err as Error).message;
+      products.value = [];
+      console.log(error.value);
+    } finally {
+      isLoading.value = false;
+    }
+  };
 
-	const searchProducts = async (query: string) => {
-		search.value = "";
-		if (!query) {
-			searchResult.value = [];
-			return;
-		}
-		search.value = query;
-		try {
-			const responce = await fetch(
-				`${apiBaseUrl}/products/search?q=${encodeURIComponent(query)}`,
-			);
-			if (!responce.ok) throw new Error("Api answer error");
-			const data = await responce.json();
-			searchResult.value = data.products;
-		} catch (err) {
-			console.error(err);
-			searchResult.value = [];
-		}
-	};
-	const searchCategory = async (category: string) => {
-		search.value = "";
-		isLoading.value = true;
-		if (!category) {
-			searchResult.value = [];
-			return;
-		}
-		search.value = category;
-		try {
-			const responce = await fetch(
-				`${apiBaseUrl}/products/category/${encodeURIComponent(category)}`,
-			);
-			if (!responce.ok) throw new Error("Api answer error");
-			const data = await responce.json();
-			searchResult.value = data.products;
-		} catch (err) {
-			console.error(err);
-			searchResult.value = [];
-		} finally {
-			isLoading.value = false;
-		}
-	};
+  const prevPage = () => {
+    if (hasPrevPage) {
+      params.value = {
+        category: "",
+        search: "",
+        page: params.value.page - 1,
+        limit: 20,
+      };
+    }
+  };
+  const nextPage = () => {
+    if (hasNextPage) {
+      params.value = {
+        category: "",
+        search: "",
+        page: params.value.page + 1,
+        limit: 20,
+      };
+    }
+  };
 
-	const currentProducts = computed(() => {
-		return search.value ? searchResult.value : products.value;
-	});
+  const fetchCategories = async () => {
+    params.value.page = 0;
+    categories.value = [];
+    error.value = null;
+    try {
+      const responce = await apiProduct.get("/categories/");
+      categories.value = responce.data;
+    } catch (err) {
+      error.value = (err as Error).message;
+      console.log(error.value);
+    }
+  };
 
-	return {
-		products,
-		searchResult,
-		categories,
-		isLoading,
-		currentProducts,
-		hasNextPage,
-		hasPrevPage,
-		nextPage,
-		prevPage,
-		searchCategory,
-		fetchProducts,
-		fetchCategories,
-		searchProducts,
-	};
+  const setSearch = (query: string) => {
+    params.value = {
+      category: "",
+      search: query,
+      page: 0,
+      limit: 20,
+    };
+  };
+  const setCategory = (category: string) => {
+    params.value = {
+      category: category,
+      search: "",
+      page: 0,
+      limit: 20,
+    };
+  };
+
+  return {
+    params,
+    products,
+    categories,
+    isLoading,
+    error,
+    hasNextPage,
+    hasPrevPage,
+    nextPage,
+    prevPage,
+    fetchProducts,
+    fetchCategories,
+    setSearch,
+    setCategory,
+  };
 });
