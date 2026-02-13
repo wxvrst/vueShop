@@ -9,6 +9,12 @@ interface Product {
   rating: string;
   thumbnail: string;
 }
+interface User {
+  id: number;
+  username: string;
+  password: string; //?
+  image?: string;
+}
 interface Params {
   search: string;
   category: string;
@@ -16,8 +22,8 @@ interface Params {
   limit: number;
 }
 interface FetchParams {
-  limit: number;
-  skip: number;
+  limit?: number;
+  skip?: number;
 }
 interface Category {
   slug: string;
@@ -27,4 +33,7 @@ interface Category {
 interface CartItem extends Product {
   quantity: number;
 }
-export type { Product, Category, CartItem, Params, FetchParams };
+interface AuthUser extends User {
+  isloggeed: boolean;
+}
+export type { Product, Category, CartItem, Params, FetchParams, User };

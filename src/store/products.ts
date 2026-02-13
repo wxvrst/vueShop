@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { watchDebounced } from "@vueuse/core";
 import type { Product, Category, Params, FetchParams } from "../types/types";
-import apiProduct from "../services/api";
+import { apiProduct } from "../services/api";
 export const useProductStore = defineStore("products", () => {
   const products = ref<Product[]>([]);
   const categories = ref<Category[]>([]);
@@ -13,7 +13,7 @@ export const useProductStore = defineStore("products", () => {
     page: 0,
     limit: 20,
   });
-
+  
   const isLoading = ref<boolean>(false);
   const error = ref<string | null>(null);
   const totalProducts = ref<number>(0);
@@ -39,10 +39,10 @@ export const useProductStore = defineStore("products", () => {
 
     try {
       let endpoint = "/";
-      let queryParams: FetchParams | {} = {};
-      if (params.value.search != "") {
+      let queryParams: FetchParams = {};
+      if (params.value.search) {
         endpoint = `/search?q=${encodeURIComponent(params.value.search)}`;
-      } else if (params.value.category != "") {
+      } else if (params.value.category) {
         endpoint = `/category/${encodeURIComponent(params.value.category)}`;
       } else {
         queryParams = {
@@ -50,9 +50,9 @@ export const useProductStore = defineStore("products", () => {
           skip: params.value.limit * params.value.page,
         };
       }
-      const responce = await apiProduct.get(endpoint, { params: queryParams });
-      products.value = responce.data.products;
-      totalProducts.value = responce.data.total;
+      const response = await apiProduct.get(endpoint, { params: queryParams });
+      products.value = response.data.products;
+      totalProducts.value = response.data.total;
     } catch (err) {
       error.value = (err as Error).message;
       products.value = [];
@@ -88,8 +88,8 @@ export const useProductStore = defineStore("products", () => {
     categories.value = [];
     error.value = null;
     try {
-      const responce = await apiProduct.get("/categories/");
-      categories.value = responce.data;
+      const response = await apiProduct.get("/categories/");
+      categories.value = response.data;
     } catch (err) {
       error.value = (err as Error).message;
       console.log(error.value);

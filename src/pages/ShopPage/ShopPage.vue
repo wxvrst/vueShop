@@ -41,7 +41,6 @@ onMounted(() => {
     productStore.fetchProducts();
     productStore.fetchCategories();
 });
-//Дебаунс
 const handleSearch = (query: string) => {
     selectedCategory.value = "";
     productStore.setSearch(query);

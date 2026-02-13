@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ProductCard from "../../components/ui/ProductCard.vue";
 import { useCartStore } from "../../store/cart";
-import { userFavoriteStore } from "../../store/favorite";
-const favoriteStore = userFavoriteStore();
+import { useFavoriteStore } from "../../store/favorite";
+const favoriteStore = useFavoriteStore();
 const cartStore = useCartStore();
 const handleAddEverything = () => {
     cartStore.addAllFavorite(favoriteStore.favoriteList);
