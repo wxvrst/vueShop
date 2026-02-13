@@ -35,7 +35,12 @@ const addToCartHandler = (product: Product) => {
         <div
             class="flex flex-col justify-between min-h-120 p-2 gap-1 rounded-2xl text-left hover:shadow-sm"
         >
-            <img :src="product.thumbnail" :alt="product.title" class="w-fit" />
+            <img
+                :src="product.thumbnail"
+                :alt="product.title"
+                class="w-fit"
+                loading="lazy"
+            />
             <div class="flex flex-col gap-2">
                 <router-link
                     :to="{ name: 'product', params: { id: product.id } }"

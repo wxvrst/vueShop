@@ -3,9 +3,11 @@ import { ref, computed } from "vue";
 import { watchDebounced } from "@vueuse/core";
 import type { Product, Category, Params, FetchParams } from "../types/types";
 import { apiProduct } from "../services/api";
+
 export const useProductStore = defineStore("products", () => {
   const products = ref<Product[]>([]);
   const categories = ref<Category[]>([]);
+  const currentProduct = ref<Product>();
 
   const params = ref<Params>({
     search: "",
@@ -13,7 +15,7 @@ export const useProductStore = defineStore("products", () => {
     page: 0,
     limit: 20,
   });
-  
+
   const isLoading = ref<boolean>(false);
   const error = ref<string | null>(null);
   const totalProducts = ref<number>(0);
@@ -96,6 +98,16 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
+  const fetchProduct = async (productId: number) => {
+    try {
+      const response = await apiProduct.get(`/${productId}`);
+      currentProduct.value = response.data;
+    } catch (err) {
+      error.value = (err as Error).message;
+      console.log(error.value);
+    }
+  };
+
   const setSearch = (query: string) => {
     params.value = {
       category: "",
@@ -125,6 +137,8 @@ export const useProductStore = defineStore("products", () => {
     prevPage,
     fetchProducts,
     fetchCategories,
+    fetchProduct,
+    currentProduct,
     setSearch,
     setCategory,
   };

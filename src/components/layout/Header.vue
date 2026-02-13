@@ -41,9 +41,6 @@ const links = [
                     class="w-7"
                 />
             </router-link>
-            <router-link to="/search">
-                <img src="../../assets/search_icon.svg" alt="search icon" />
-            </router-link>
             <router-link to="/profile">
                 <img
                     src="../../assets/profile_icon.svg"

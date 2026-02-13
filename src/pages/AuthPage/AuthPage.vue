@@ -5,7 +5,7 @@ import { useUsersStore } from "../../store/users";
 
 const userStore = useUsersStore();
 
-const notificationMessage = ref<string>("Message");
+const notificationMessage = ref<string>("");
 
 const handleAuth = (user: User, confirmPassword?: string) => {
     if (confirmPassword) {
@@ -23,7 +23,10 @@ onMounted(() => {
 });
 </script>
 <template>
-    <span class="">Authentication</span><br />
-    <span v-if="notificationMessage">{{ notificationMessage }}</span>
-    <router-view @auth="handleAuth" />
+    <section class="flex flex-col items-center gap-2">
+        <span v-if="notificationMessage" class="text-green-500">
+            {{ notificationMessage }}
+        </span>
+        <router-view @auth="handleAuth" />
+    </section>
 </template>

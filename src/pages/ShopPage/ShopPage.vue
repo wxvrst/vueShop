@@ -1,23 +1,11 @@
 <script setup lang="ts">
-import { onMounted, ref, nextTick } from "vue";
+import { onMounted, ref } from "vue";
 import { useProductStore } from "../../store/products";
 import ProductCard from "../../components/ui/ProductCard.vue";
 const productStore = useProductStore();
 
 const search = ref<string>("");
 const selectedCategory = ref<string>("");
-
-//TODO
-// const targetScroll = ref();
-// const scrollToSection = async () => {
-//     await nextTick();
-//     targetScroll.value.scrollIntoView({
-//         behavior: "smooth",
-//         block: "start",
-//         inline: "nearest",
-//     });
-// };
-
 const prev = () => {
     productStore.prevPage();
     setTimeout(() => {
