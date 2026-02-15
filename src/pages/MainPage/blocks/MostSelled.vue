@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import image1 from "../../../assets/selled_product_1.svg";
-import image2 from "../../../assets/selled_product_2.svg";
-import image3 from "../../../assets/selled_product_3.svg";
-import image4 from "../../../assets/selled_product_4.svg";
+import image1 from "../../../public/selled_product_1.svg";
+import image2 from "../../../public/selled_product_2.svg";
+import image3 from "../../../public/selled_product_3.svg";
+import image4 from "../../../public/selled_product_4.svg";
 const items = ref([
 	{
 		image: image1,

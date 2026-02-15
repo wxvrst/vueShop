@@ -49,7 +49,6 @@ const items = ref([
             <div class="relative w-full">
                 <input type="" placeholder="Search keyboard"
                     class="border py-3 px-12 w-1/2 rounded-4xl border-[#C5C5C5] outline-none hover:border-[#888888] focus:border-[#888888]">
-                <img src="../../../assets/search_icon.svg" alt="seatch icon" class="absolute left-10/39 top-3">
                 </input>
             </div>
             <div class="flex flex-wrap gap-2 w-1/2 justify-center">
@@ -66,7 +65,7 @@ const items = ref([
             <span class="w-1/2">
                 Sign up for texts to be notified about our best offers on the perfect gifts.
             </span>
-            <img src="../../../assets/search_block_image.svg" alt="picture">
+            <img src="../../../public/search_block_image.svg" alt="picture">
             <div>
                 <input type="" placeholder="Your email"
                     class="border-y border-l rounded-y-4xl rounded-l-4xl py-3 px-8 outline-none "

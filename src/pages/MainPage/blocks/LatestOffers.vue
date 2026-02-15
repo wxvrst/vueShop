@@ -17,7 +17,7 @@
 					class="flex flex-col text-end shadow-2xl px-8 cursor-pointer hover:shadow-xl rounded-xl"
 				>
 					<img
-						src="../../../assets/category_1.svg"
+						src="../../../public/category_1.svg"
 						alt="category"
 						class="w-fit"
 					/>
@@ -30,7 +30,7 @@
 				<div
 					class="flex text-end shadow-2xl px-8 min-h-0 items-center cursor-pointer hover:shadow-xl rounded-xl"
 				>
-					<img src="../../../assets/category_2.svg" alt="category" />
+					<img src="../../../public/category_2.svg" alt="category" />
 					<div class="flex flex-col">
 						<span>Watch</span>
 						<span class="text-4xl"> Not just stylish </span>
@@ -40,7 +40,7 @@
 			<div
 				class="w-78 shadow-2xl flex flex-col gap-4 justify-center cursor-pointer hover:shadow-xl rounded-xl"
 			>
-				<img src="../../../assets/category_3.svg" alt="category" />
+				<img src="../../../public/category_3.svg" alt="category" />
 				<div class="flex flex-col">
 					<span>Phones</span>
 					<span class="text-4xl">
@@ -56,7 +56,7 @@
 					<span>Tablet</span>
 					<span class="text-4xl"> Empower your work </span>
 				</div>
-				<img src="../../../assets/category_4.svg" alt="category" />
+				<img src="../../../public/category_4.svg" alt="category" />
 			</div>
 		</div>
 	</section>

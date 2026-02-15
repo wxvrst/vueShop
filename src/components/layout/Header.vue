@@ -21,7 +21,7 @@ const links = [
 <template>
     <header class="flex justify-between w-full my-6">
         <router-link to="/">
-            <img src="../../assets/logo.svg" alt="logo" />
+            <img src='../../public/logo.svg' alt="logo" />
         </router-link>
         <div class="flex gap-8">
             <router-link
@@ -36,20 +36,20 @@ const links = [
         <div class="flex gap-4 items-center justify-center">
             <router-link to="/favorite">
                 <img
-                    src="../../assets/favorite_icon.svg"
+                    src='../../public/favorite_icon.svg'
                     alt="favorite icon"
                     class="w-7"
                 />
             </router-link>
             <router-link to="/profile">
                 <img
-                    src="../../assets/profile_icon.svg"
+                    src="../../public/profile_icon.svg"
                     alt="profile icon"
                     class="w-7"
                 />
             </router-link>
             <router-link to="/cart">
-                <img src="../../assets/cart_icon.svg" alt="cart icon" />
+                <img src="../../public/cart_icon.svg" alt="cart icon" />
             </router-link>
         </div>
     </header>

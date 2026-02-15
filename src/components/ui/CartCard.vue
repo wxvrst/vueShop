@@ -2,8 +2,8 @@
 import { useCartStore } from "../../store/cart";
 import { useFavoriteStore } from "../../store/favorite";
 import type { CartItem } from "../../types/types";
-import favoriteTrue from "../../assets/favorite_icon_1.svg";
-import favoriteFalse from "../../assets/favorite_icon_0.svg";
+import favoriteTrue from "../../public/favorite_icon_1.svg";
+import favoriteFalse from "../../public/favorite_icon_0.svg";
 const props = defineProps<{
     product: CartItem;
 }>();
@@ -48,7 +48,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                     </button>
                     <button @click="handleDeleteProduct(product)">
                         <img
-                            src="../../assets/delete_icon.svg"
+                            src="../../public/delete_icon.svg"
                             alt="delete icon"
                         />
                     </button>
@@ -62,7 +62,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                     class="rounded-full hover:bg-blue-200 h-8 w-8 transition-color duration-200 active:animate-ping active:scale-80"
                 >
                     <img
-                        src="../../assets/minus_icon.svg"
+                        src="../../public/minus_icon.svg"
                         alt="minus icon"
                         class="w-8 h-8 scale-80"
                     />
@@ -73,7 +73,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                     class="rounded-full hover:bg-blue-200 h-8 w-8 transition-color duration-200 active:animate-ping active:scale-80"
                 >
                     <img
-                        src="../../assets/plus_icon.svg"
+                        src="../../public/plus_icon.svg"
                         alt="plus icon"
                         class="w-8 h-8 scale-80"
                     />

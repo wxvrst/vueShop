@@ -39,7 +39,7 @@ const items = [
 <template>
 	<footer class="flex gap-16 my-12 py-12 text-left border-t border-[#bcbcbc]">
 		<div class="w-1/3 flex flex-col gap-2 items-start">
-			<img src="../../assets/logo.svg" alt="logo" class="h-6" />
+			<img src="../../public/logo.svg" alt="logo" class="h-6" />
 			<span>
 				Sign up for texts to be notified about our best offers on the
 				perfect gifts.

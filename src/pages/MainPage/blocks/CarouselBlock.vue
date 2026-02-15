@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import image1 from "../../../assets/carousel_1.svg";
+import image1 from "../../../public/carousel_1.svg";
 const items = [
 	{
 		title: "The new phone a here, take a look!",
 		description:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque in est dui, aliquam, tempor. Faucibus morbi turpis.",
 		url: "/",
-		image: image1,
+		image: image1
 	},
 	// {
 	//     title: 'The new phone a here, take a look!',
@@ -43,7 +43,7 @@ const next = () => {
 		class="bg-[#DCE5E2] rounded-xl flex justify-between h-132 px-2 mt-6"
 	>
 		<button @click="prev" class="cursor-pointer">
-			<img src="../../../assets/arrow.svg" alt="arrow" class="w-6" />
+			<img src="../../../public/arrow.svg" alt="arrow" class="w-6" />
 		</button>
 
 		<div
@@ -70,7 +70,7 @@ const next = () => {
 
 		<button @click="next" class="cursor-pointer">
 			<img
-				src="../../../assets/arrow.svg"
+				src="../../../public/arrow.svg"
 				alt="arrow"
 				class="transform -scale-x-100 w-6"
 			/>

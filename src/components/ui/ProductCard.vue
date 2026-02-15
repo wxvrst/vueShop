@@ -2,8 +2,8 @@
 import type { Product } from "../../types/types";
 import { useCartStore } from "../../store/cart";
 import { useFavoriteStore } from "../../store/favorite";
-import favoriteTrue from "../../assets/favorite_icon_1.svg";
-import favoriteFalse from "../../assets/favorite_icon_0.svg";
+import favoriteTrue from "../../public/favorite_icon_1.svg";
+import favoriteFalse from "../../public/favorite_icon_0.svg";
 
 const props = defineProps<{
     product: Product;

@@ -41,7 +41,7 @@ const handleClearCart = () => {
 			<span class="text-2xl">Submit order</span>
 			{{
 				cartStore.cartCount
-					? `${cartStore.cartTotal} $ in total`
+					? `${cartStore.cartTotal.toFixed(2)} $ in total`
 					: "No products in cart"
 			}}
 			<button

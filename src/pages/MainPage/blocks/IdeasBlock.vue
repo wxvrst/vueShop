@@ -8,7 +8,7 @@
 			</span>
 		</div>
 		<div class="flex gap-4">
-			<img src="../../../assets/ideas_picture.svg" alt="picture" />
+			<img src="../../../public/ideas_picture.svg" alt="picture" />
 			<div
 				class="flex flex-col gap-4 items-start text-left text-[26px] py-4"
 			>
@@ -24,7 +24,7 @@
 		</div>
 		<router-link to="" class="flex self-center text-2xl hover:underline">
 			See all
-			<img src="../../../assets/arrow_link.svg" alt="" />
+			<img src="../../../public/arrow_link.svg" alt="" />
 		</router-link>
 	</section>
 </template>
