@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from "vue";
+import { onMounted, ref} from "vue";
 import { useProductStore } from "@/store/products";
 import ProductCard from "@/components/ui/ProductCard.vue";
 import Button from "@/components/ui/Button.vue";
 import type { SortByList } from "@/types/types";
-import { useRoute } from "vue-router";
 
 const productStore = useProductStore();
 

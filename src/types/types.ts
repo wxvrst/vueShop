@@ -48,7 +48,7 @@ interface Category {
 interface CartItem extends Product {
   quantity: number;
 }
-interface AuthUser extends User {
-  isloggeed: boolean;
-}
+// interface AuthUser extends User {
+//   isloggeed: boolean;
+// }
 export type { Product, Category, CartItem, Params, FetchParams, User,SortByList };
