@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { User } from "../../../types/types";
+import type { User } from "@/types/types";
 
 const emit = defineEmits<{
     (isRegister: "auth", user: User, confirmPassword?: string): void;

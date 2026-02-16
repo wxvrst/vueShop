@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useProductStore } from "../../store/products";
-import ProductCard from "../../components/ui/ProductCard.vue";
+import { useProductStore } from "@/store/products";
+import ProductCard from "@/components/ui/ProductCard.vue";
 const productStore = useProductStore();
 
 const search = ref<string>("");

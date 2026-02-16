@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import image1 from "../../../public/best_categories_1.svg";
-import image2 from "../../../public/best_categories_2.svg";
-import image3 from "../../../public/best_categories_3.svg";
+import image2 from "@/public/best_categories_2.svg";
+import image3 from "@/public/best_categories_3.svg";
+import image1 from "@/public/best_categories_1.svg";
 const items = ref([
 	{
 		name: "Smart light bulb pack",

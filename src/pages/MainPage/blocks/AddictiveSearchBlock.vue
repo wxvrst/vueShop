@@ -65,7 +65,7 @@ const items = ref([
             <span class="w-1/2">
                 Sign up for texts to be notified about our best offers on the perfect gifts.
             </span>
-            <img src="../../../public/search_block_image.svg" alt="picture">
+            <img src="@/public/search_block_image.svg" alt="picture">
             <div>
                 <input type="" placeholder="Your email"
                     class="border-y border-l rounded-y-4xl rounded-l-4xl py-3 px-8 outline-none "

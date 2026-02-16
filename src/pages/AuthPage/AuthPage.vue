@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import type { User } from "../../types/types";
-import { useUsersStore } from "../../store/users";
+import type { User } from "@/types/types";
+import { useUsersStore } from "@/store/users";
 
 const userStore = useUsersStore();
 
