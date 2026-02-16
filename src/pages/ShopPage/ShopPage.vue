@@ -2,10 +2,42 @@
 import { onMounted, ref } from "vue";
 import { useProductStore } from "@/store/products";
 import ProductCard from "@/components/ui/ProductCard.vue";
+import Button from "@/components/ui/Button.vue";
+import type { SortByList } from "@/types/types";
+
 const productStore = useProductStore();
 
 const search = ref<string>("");
 const selectedCategory = ref<string>("");
+const selectedSort = ref<SortByList>({
+    name: "By rating ↓",
+    sort: "rating",
+    order: "desc",
+});
+
+const sortByList = ref<SortByList[]>([
+    {
+        name: "By rating ↓",
+        sort: "rating",
+        order: "desc",
+    },
+    {
+        name: "By rating ↑",
+        sort: "rating",
+        order: "asc",
+    },
+    {
+        name: "By price ↓",
+        sort: "price",
+        order: "desc",
+    },
+    {
+        name: "By price ↑",
+        sort: "price",
+        order: "asc",
+    },
+]);
+
 const prev = () => {
     productStore.prevPage();
     setTimeout(() => {
@@ -25,17 +57,23 @@ const next = () => {
     }, 400);
 };
 
-onMounted(() => {
-    productStore.fetchProducts();
-    productStore.fetchCategories();
-});
 const handleSearch = (query: string) => {
     selectedCategory.value = "";
+    selectedSort.value = {
+        name: "",
+        sort: "rating",
+        order: "desc",
+    };
     productStore.setSearch(query);
 };
 
 const handleCategoryChange = (slug: string) => {
     search.value = "";
+    selectedSort.value = {
+        name: "",
+        sort: "rating",
+        order: "desc",
+    };
     if (selectedCategory.value != slug) {
         selectedCategory.value = slug;
     } else {
@@ -43,6 +81,25 @@ const handleCategoryChange = (slug: string) => {
     }
     productStore.setCategory(selectedCategory.value);
 };
+const handleSortChange = (sort: SortByList) => {
+    search.value = "";
+    selectedCategory.value = "";
+    if (selectedSort.value?.name != sort.name) {
+        selectedSort.value.name = sort.name;
+    } else {
+        selectedSort.value = {
+            name: "By rating ↓",
+            sort: "rating",
+            order: "desc",
+        };
+    }
+    productStore.setSortBy(sort.sort, sort.order);
+};
+
+onMounted(() => {
+    productStore.fetchProducts();
+    productStore.fetchCategories();
+});
 </script>
 <template>
     <input
@@ -51,14 +108,14 @@ const handleCategoryChange = (slug: string) => {
         v-model="search"
         @input="handleSearch(search)"
         type="text"
-        class="border border-[#9f9f9f] rounded-2xl py-2 px-8 w-1/3 outline-none focus:border-black my-6"
+        class="border border-gray-400 rounded-2xl py-2 px-8 w-1/3 outline-none focus:border-black mb-6"
     />
     <div class="flex gap-2 overflow-x-scroll">
         <button
             v-for="(category, index) in productStore.categories"
             @click="handleCategoryChange(category.slug)"
             :key="index"
-            class="border border-[#9f9f9f] rounded-4xl py-2 px-6 whitespace-nowrap cursor-pointer"
+            class="border border-gray-400 rounded-4xl py-2 px-6 whitespace-nowrap cursor-pointer"
             :class="{
                 'text-white bg-black transition-colors duration-400':
                     selectedCategory == category.slug,
@@ -67,7 +124,21 @@ const handleCategoryChange = (slug: string) => {
             {{ category.name }}
         </button>
     </div>
-    <section class="grid grid-cols-4 gap-4">
+    <div class="flex gap-2 justify-center">
+        <button
+            v-for="(sort, index) in sortByList"
+            @click="handleSortChange(sort)"
+            :key="index"
+            class="border border-gray-400 rounded-4xl py-2 px-6 whitespace-nowrap cursor-pointer"
+            :class="{
+                'text-white bg-black transition-colors duration-400':
+                    selectedSort.name == sort.name,
+            }"
+        >
+            {{ sort.name }}
+        </button>
+    </div>
+    <section class="grid grid-cols-5 gap-4">
         <p v-if="productStore.isLoading">Products loading...</p>
         <ProductCard
             v-for="product in productStore.products"
@@ -76,19 +147,19 @@ const handleCategoryChange = (slug: string) => {
         ></ProductCard>
     </section>
     <div class="flex justify-center gap-48 mt-8">
-        <button
+        <Button
             @click="prev"
-            class="border rounded-4xl py-2 px-6 cursor-pointer disabled:border-[#9f9f9f] disabled:text-[#9f9f9f]"
+            class="disabled:border-gray-400 disabled:text-gray-400"
             :disabled="!productStore.hasPrevPage"
         >
             Назад
-        </button>
-        <button
+        </Button>
+        <Button
             @click="next"
-            class="border rounded-4xl py-2 px-6 cursor-pointer disabled:border-[#9f9f9f] disabled:text-[#9f9f9f]"
+            class="disabled:border-gray-400 disabled:text-gray-400"
             :disabled="!productStore.hasNextPage"
         >
             Вперёд
-        </button>
+        </Button>
     </div>
 </template>

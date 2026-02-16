@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { User } from "@/types/types.ts";
+import Button from "@/components/ui/Button.vue";
 
 const emit = defineEmits<{
     (isRegister: "auth", user: User, confirmPassword?: string): void;
@@ -42,12 +43,7 @@ const handleRegister = (user: User) => {
             placeholder="Confirm password"
             class="border rounded-xl px-4 py-2"
         />
-        <button
-            @click="handleRegister(user)"
-            class="border px-4 py-1 rounded-xl hover:text-white hover:bg-black transition-colors duration-200"
-        >
-            Register
-        </button>
+        <Button @click="handleRegister(user)"> Register </Button>
         <router-link to="/auth" class="hover:underline">
             Want to register?
         </router-link>

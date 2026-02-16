@@ -9,7 +9,7 @@ const handleClearCart = () => {
 </script>
 <template>
     <section class="flex gap-6 m-6">
-        <div class="w-full border border-[#c5c5c5] rounded p-4 text-left">
+        <div class="w-full border border-gray-400 rounded p-4 text-left">
             <div class="flex justify-between mb-2">
                 <span>
                     <span class="font-bold text-2xl">Cart: </span>
@@ -24,7 +24,7 @@ const handleClearCart = () => {
                 </span>
                 <button
                     @click="handleClearCart"
-                    class="border rounded-lg py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400"
+                    class="border rounded py-1 px-4 hover:text-white hover:bg-black transition-colors duration-400"
                 >
                     Clear Cart
                 </button>
@@ -38,7 +38,7 @@ const handleClearCart = () => {
             </div>
         </div>
         <div
-            class="w-1/4 flex flex-col gap-4 border border-[#c5c5c5] rounded p-4 text-center h-fit items-center"
+            class="w-1/4 flex flex-col gap-4 border border-gray-400 rounded p-4 text-center h-fit items-center"
         >
             <span class="text-2xl">Submit order</span>
             {{

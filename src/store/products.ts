@@ -9,13 +9,15 @@ export const useProductStore = defineStore(
   () => {
     const products = ref<Product[]>([]);
     const categories = ref<Category[]>([]);
-    const currentProduct = ref<Product>();
+    const currentProduct = ref<Product | null>();
 
     const params = ref<Params>({
       search: "",
       category: "",
       page: 0,
       limit: 20,
+      sortBy: "title",
+      order: "asc",
     });
 
     const isLoading = ref<boolean>(false);
@@ -52,12 +54,15 @@ export const useProductStore = defineStore(
           queryParams = {
             limit: params.value.limit,
             skip: params.value.limit * params.value.page,
+            sortBy: params.value.sortBy,
+            order: params.value.order,
           };
         }
         const response = await apiProduct.get(endpoint, {
           params: queryParams,
         });
         products.value = response.data.products;
+        console.log(products.value);
         totalProducts.value = response.data.total;
       } catch (err) {
         error.value = (err as Error).message;
@@ -71,20 +76,16 @@ export const useProductStore = defineStore(
     const prevPage = () => {
       if (hasPrevPage) {
         params.value = {
-          category: "",
-          search: "",
+          ...params.value,
           page: params.value.page - 1,
-          limit: 20,
         };
       }
     };
     const nextPage = () => {
       if (hasNextPage) {
         params.value = {
-          category: "",
-          search: "",
+          ...params.value,
           page: params.value.page + 1,
-          limit: 20,
         };
       }
     };
@@ -114,21 +115,33 @@ export const useProductStore = defineStore(
 
     const setSearch = (query: string) => {
       params.value = {
+        ...params.value,
         category: "",
         search: query,
         page: 0,
-        limit: 20,
       };
     };
     const setCategory = (category: string) => {
       params.value = {
+        ...params.value,
         category: category,
         search: "",
         page: 0,
-        limit: 20,
       };
     };
-
+    const setSortBy = (
+      sortBy: string = "title",
+      order: "desc" | "asc" = "desc",
+    ) => {
+      params.value = {
+        ...params.value,
+        category: "",
+        search: "",
+        page: 0,
+        sortBy: sortBy,
+        order: order,
+      };
+    };
     return {
       params,
       products,
@@ -145,11 +158,12 @@ export const useProductStore = defineStore(
       currentProduct,
       setSearch,
       setCategory,
+      setSortBy,
     };
   },
   {
     persist: {
-      pick: ["params"],
+      pick: ["params", "currentProduct"],
       storage: sessionStorage,
       key: "product-params",
     },

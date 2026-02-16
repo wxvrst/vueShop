@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useCartStore } from "../../store/cart";
-import { useFavoriteStore } from "../../store/favorite";
-import type { CartItem } from "../../types/types";
-import favoriteTrue from "../../public/favorite_icon_1.svg";
-import favoriteFalse from "../../public/favorite_icon_0.svg";
+import { useCartStore } from "@/store/cart";
+import { useFavoriteStore } from "@/store/favorite";
+import type { CartItem } from "@/types/types";
+import favoriteTrue from "@/public/favorite_icon_1.svg";
+import favoriteFalse from "@/public/favorite_icon_0.svg";
 const props = defineProps<{
     product: CartItem;
 }>();
@@ -24,16 +24,23 @@ const addToFavoriteHandler = (product: CartItem) => {
 </script>
 <template>
     <div
-        class="flex gap-4 border rounded justify-between bg-gray-100 border-[#c5c5c5] p-2"
+        class="flex gap-4 border rounded justify-between bg-gray-100 border-gray-400 p-2"
     >
         <div class="flex">
             <img :src="product.thumbnail" :alt="product.title" class="w-48" />
             <div class="flex flex-col justify-between">
                 <span>
-                    <router-link to="/" class="hover:underline">
-                        {{ product.title }}</router-link
-                    ><br />
-                    <span>★{{ product.rating }}</span>
+                    <router-link
+                        class="font-bold cursor-pointer hover:underline"
+                        :to="{ name: 'product', params: { id: product.id } }"
+                    >
+                        {{ product.title }}
+                    </router-link>
+                    <br />
+                    <span>
+                        <span class="text-yellow-400">★ </span>
+                        {{ product.rating }}
+                    </span>
                 </span>
                 <div>
                     <button @click="addToFavoriteHandler(product)" class="mr-6">
@@ -47,10 +54,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                         />
                     </button>
                     <button @click="handleDeleteProduct(product)">
-                        <img
-                            src="../../public/delete_icon.svg"
-                            alt="delete icon"
-                        />
+                        <img src="@/public/delete_icon.svg" alt="delete icon" />
                     </button>
                 </div>
             </div>
@@ -62,7 +66,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                     class="rounded-full hover:bg-blue-200 h-8 w-8 transition-color duration-200 active:animate-ping active:scale-80"
                 >
                     <img
-                        src="../../public/minus_icon.svg"
+                        src="@/public/minus_icon.svg"
                         alt="minus icon"
                         class="w-8 h-8 scale-80"
                     />
@@ -73,7 +77,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                     class="rounded-full hover:bg-blue-200 h-8 w-8 transition-color duration-200 active:animate-ping active:scale-80"
                 >
                     <img
-                        src="../../public/plus_icon.svg"
+                        src="@/public/plus_icon.svg"
                         alt="plus icon"
                         class="w-8 h-8 scale-80"
                     />

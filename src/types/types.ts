@@ -8,6 +8,12 @@ interface Product {
   brand: string;
   rating: string;
   thumbnail: string;
+  reviews?: Review[];
+}
+interface Review {
+  rating: string;
+  comment: string;
+  reviewerName: string;
 }
 interface User {
   id: number;
@@ -20,10 +26,19 @@ interface Params {
   category: string;
   page: number;
   limit: number;
+  sortBy: string;
+  order: "asc" | "desc";
 }
 interface FetchParams {
   limit?: number;
   skip?: number;
+  sortBy?: string;
+  order?: "asc" | "desc";
+}
+interface SortByList {
+  name: string;
+  sort: string;
+  order: "asc" | "desc";
 }
 interface Category {
   slug: string;
@@ -36,4 +51,4 @@ interface CartItem extends Product {
 interface AuthUser extends User {
   isloggeed: boolean;
 }
-export type { Product, Category, CartItem, Params, FetchParams, User };
+export type { Product, Category, CartItem, Params, FetchParams, User,SortByList };
