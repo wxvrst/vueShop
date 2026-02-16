@@ -16,7 +16,7 @@ const addToFavoriteHandler = (product: Product) => {
         class="relative flex flex-col rounded justify-between cursor-pointer gap-2 text-left group"
         :to="{ name: 'product', params: { id: product.id } }"
     >
-        <button
+        <button 
             @click.stop.prevent="addToFavoriteHandler(product)"
             class="mr-6 absolute right-2 top-4 active:animate-ping active:scale-80 duration-200"
         >

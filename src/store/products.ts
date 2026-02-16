@@ -10,15 +10,15 @@ export const useProductStore = defineStore(
     const products = ref<Product[]>([]);
     const categories = ref<Category[]>([]);
     const currentProduct = ref<Product | null>();
-
-    const params = ref<Params>({
+    const initialParams: Params = {
       search: "",
       category: "",
       page: 0,
       limit: 20,
       sortBy: "title",
       order: "asc",
-    });
+    };
+    const params = ref<Params>(initialParams);
 
     const isLoading = ref<boolean>(false);
     const error = ref<string | null>(null);
@@ -35,7 +35,7 @@ export const useProductStore = defineStore(
       async () => {
         fetchProducts();
       },
-      { debounce: 400 },
+      { debounce: 200 },
     );
 
     const fetchProducts = async () => {
@@ -62,7 +62,6 @@ export const useProductStore = defineStore(
           params: queryParams,
         });
         products.value = response.data.products;
-        console.log(products.value);
         totalProducts.value = response.data.total;
       } catch (err) {
         error.value = (err as Error).message;
@@ -119,20 +118,22 @@ export const useProductStore = defineStore(
         category: "",
         search: query,
         page: 0,
+        sortBy: "title",
+        order: "asc",
       };
     };
+    
     const setCategory = (category: string) => {
       params.value = {
         ...params.value,
         category: category,
         search: "",
         page: 0,
+        sortBy: "title",
+        order: "asc",
       };
     };
-    const setSortBy = (
-      sortBy: string = "title",
-      order: "desc" | "asc" = "desc",
-    ) => {
+    const setSortBy = (sortBy: string, order: "desc" | "asc") => {
       params.value = {
         ...params.value,
         category: "",
@@ -141,6 +142,9 @@ export const useProductStore = defineStore(
         sortBy: sortBy,
         order: order,
       };
+    };
+    const setParamsToInitial = () => {
+      params.value = initialParams;
     };
     return {
       params,
@@ -159,6 +163,7 @@ export const useProductStore = defineStore(
       setSearch,
       setCategory,
       setSortBy,
+      setParamsToInitial,
     };
   },
   {

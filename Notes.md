@@ -13,21 +13,4 @@
 ├── └── │
 TODO:
   FSD архитектура и архитектура внутри файлов
-  Внутри файлов: 
-    Сначала import
-    Потом чтото глобальное?
-    Локальные переменные
-    Computed
-    OnMounted в конце
-  FSD:
-  Project/
-    app/
-      App.vue
-      main.ts
-      style.css
-      router/
-        index.ts
-        routes/
-          routes.ts
-    pages/
-      MainPage/
+  Разобраться с сортировкой, с тем, что не выводит initial после смены
