@@ -14,3 +14,8 @@ axios
 **TODO:**
 FSD архитектура и архитектура внутри файлов
 Разобраться с сортировкой, с тем, что не выводит initialState после смены страницы на product/:id, **Search URL Query**
+
+**Hotkeys:**
+Ctrl+E поиск файлов,
+Ctrl+(Shift)+H поиск с заменой  
+Ctrl+(Shitf)+F поиск 

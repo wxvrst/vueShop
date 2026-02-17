@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath, URL } from "url";
 // https://vite.dev/config/
 export default defineConfig({
-  base:'/vueShop/',
+  base: "/vueShop/",
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
