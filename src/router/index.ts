@@ -10,6 +10,9 @@ router.beforeEach(async (to) => {
   if (to.path == "/profile" && !userStore.currentUser) {
     return { path: "/auth" };
   }
+  if (to.path == "/") {
+    return { path: "/main" };
+  }
 });
 router.afterEach(async (to, from) => {
   if (to.path !== from.path) {

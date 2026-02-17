@@ -9,7 +9,7 @@ const handleClearCart = () => {
 </script>
 <template>
     <section class="flex gap-6 m-6">
-        <div class="w-full border border-gray-400 rounded p-4 text-left">
+        <div class="w-full text-left">
             <div class="flex justify-between mb-2">
                 <span>
                     <span class="font-bold text-2xl">Cart: </span>
@@ -33,14 +33,14 @@ const handleClearCart = () => {
             </div>
         </div>
         <div
-            class="w-1/4 flex flex-col gap-4 border border-gray-400 rounded p-4 text-center h-fit items-center"
+            class="w-fit flex flex-col gap-4 text-center h-fit items-center px-4 text-nowrap"
         >
             <span class="text-2xl">Submit order</span>
-            {{
-                cartStore.cartTotalCount
-                    ? `${cartStore.cartTotalPrice.toFixed(2)} $ in total`
-                    : "No products in cart"
-            }}
+                {{
+                    cartStore.cartTotalCount
+                        ? `${cartStore.cartTotalPrice.toFixed(2)} $ in total`
+                        : "No products in cart"
+                }}
             <Button @click=""> Submit order </Button>
         </div>
     </section>

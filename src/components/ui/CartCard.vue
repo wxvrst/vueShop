@@ -23,9 +23,7 @@ const addToFavoriteHandler = (product: CartItem) => {
 };
 </script>
 <template>
-    <div
-        class="flex gap-4 border rounded justify-between bg-gray-100 border-gray-400 p-2"
-    >
+    <div class="flex gap-4 justify-between p-2 border-b border-gray-200">
         <div class="flex">
             <img :src="product.thumbnail" :alt="product.title" class="w-48" />
             <div class="flex flex-col justify-between">
@@ -83,7 +81,7 @@ const addToFavoriteHandler = (product: CartItem) => {
                     />
                 </button>
             </div>
-            <span class="self-start w-32"
+            <span class="self-start w-32 text-green-600 text-right"
                 >{{ (product.price * product.quantity).toFixed(2) }} $</span
             >
         </div>

@@ -1,19 +1,22 @@
 interface Product {
   id: number;
   title: string;
-  tags: string[];
+  tags?: string[];
   category: string;
   description: string;
   price: number;
-  brand: string;
-  rating: string;
+  brand?: string;
+  rating?: string;
   thumbnail: string;
+  images?: string[];
   reviews?: Review[];
 }
 interface Review {
-  rating: string;
+  rating: number;
   comment: string;
+  date: string;
   reviewerName: string;
+  reviewerEmail: string;
 }
 interface User {
   id: number;
@@ -51,4 +54,13 @@ interface CartItem extends Product {
 // interface AuthUser extends User {
 //   isloggeed: boolean;
 // }
-export type { Product, Category, CartItem, Params, FetchParams, User,SortByList };
+export type {
+  Product,
+  Category,
+  CartItem,
+  Params,
+  FetchParams,
+  User,
+  SortByList,
+  Review,
+};

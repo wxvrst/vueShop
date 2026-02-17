@@ -2,6 +2,7 @@
 import { useProductStore } from "@/store/products";
 import Button from "@/components/ui/Button.vue";
 import { useCartStore } from "@/store/cart";
+import ReviewCard from "@/components/ui/ReviewCard.vue";
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
@@ -19,27 +20,67 @@ onMounted(() => {
 });
 </script>
 <template>
-    <section
-        class="w-9/10 flex gap-4 border border-gray-400 rounded py-2 px-4 text-left place-self-center"
-    >
-        <img
-            :src="currentProduct?.thumbnail"
-            :alt="currentProduct?.title"
-            class="bg-white rounded-lg"
-        />
-        <div class="flex flex-col gap-2">
-            <span class="font-semibold">
-                {{ currentProduct?.title }}
-                ★ {{ currentProduct?.rating }}
-            </span>
-            <span> {{ currentProduct?.description }}</span>
+    <section class="flex flex-col place-self-center">
+        <div class="w-9/10 flex gap-4 py-2 text-left">
+            <img
+                :src="currentProduct?.thumbnail"
+                :alt="currentProduct?.title"
+                class="rounded-lg bg-gray-100"
+            />
+            <div class="flex flex-col gap-2">
+                <span class="font-semibold">
+                    {{ currentProduct?.title }}
+                    <span class="text-yellow-400">★ </span>
+                    {{ currentProduct?.rating }}
+                </span>
+                <span>
+                    Brand:
+                    <router-link
+                        to="/"
+                        class="border-b border-transparent hover:border-black cursor-pointer"
+                    >
+                        {{ currentProduct?.brand }}
+                    </router-link>
+                </span>
+                <span>
+                    Tags:
+                    <router-link
+                        v-for="(item, index) in currentProduct?.tags"
+                        to="/"
+                        :key="index"
+                        class="mr-2 border-b border-transparent not-last:after:content-[','] hover:border-black cursor-pointer"
+                    >
+                        {{ item }}
+                    </router-link>
+                </span>
+                <span> {{ currentProduct?.description }}</span>
+            </div>
+            <div class="flex flex-col gap-2 px-4 items-center h-fit">
+                <span class="text-xl whitespace-nowrap">Want to order?</span>
+                <Button @click="handleAddToCart">Add to cart</Button>
+                <Button @click="handleOrderNow">Order now</Button>
+            </div>
         </div>
-        <div
-            class="flex flex-col gap-2 bg-gray-100 border border-gray-600 rounded-lg p-4 h-fit"
-        >
-            <span class="text-xl whitespace-nowrap">Want to order?</span>
-            <Button @click="handleAddToCart">Add to cart</Button>
-            <Button @click="handleOrderNow">Order now</Button>
+        <span class="text-left text-2xl">More images:</span>
+        <div class="border-b border-gray-200 my-2" />
+        <div class="flex gap-2">
+            <img
+                v-for="(image, index) in currentProduct?.images"
+                :key="index"
+                :src="image"
+                alt="currentProduct.title"
+                class="w-48 bg-gray-100 rounded"
+            />
+            <!-- <img :src="image" alt="image modal" class="place-self-center" /> -->
+        </div>
+        <span class="text-left text-2xl">Reviews:</span>
+        <div class="border-b border-gray-200 my-2" />
+        <div class="flex gap-2">
+            <ReviewCard
+                v-for="(item, index) in currentProduct?.reviews"
+                :review="item"
+                :key="index"
+            />
         </div>
     </section>
 </template>

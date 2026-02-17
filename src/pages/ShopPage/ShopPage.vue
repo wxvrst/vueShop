@@ -143,18 +143,10 @@ onMounted(() => {
         />
     </section>
     <div class="flex justify-center gap-48 mt-8">
-        <Button
-            @click="prev"
-            class="disabled:border-gray-400 disabled:text-gray-400"
-            :disabled="!productStore.hasPrevPage"
-        >
+        <Button @click="prev" :disabled="!productStore.hasPrevPage">
             Назад
         </Button>
-        <Button
-            @click="next"
-            class="disabled:border-gray-400 disabled:text-gray-400"
-            :disabled="!productStore.hasNextPage"
-        >
+        <Button @click="next" :disabled="!productStore.hasNextPage">
             Вперёд
         </Button>
     </div>

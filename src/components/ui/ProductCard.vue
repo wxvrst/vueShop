@@ -14,12 +14,12 @@ const addToFavoriteHandler = (product: Product) => {
 </script>
 <template>
     <router-link
-        class="relative flex flex-col rounded justify-between cursor-pointer gap-2 text-left group hover:animate-pulse"
+        class="relative flex flex-col rounded justify-between h-fit cursor-pointer gap-2 text-left group hover:animate-pulse"
         :to="{ name: 'product', params: { id: product.id } }"
     >
         <button
             @click.stop.prevent="addToFavoriteHandler(product)"
-            class="mr-4 absolute right-2 top-4 active:animate-ping active:scale-80 duration-200"
+            class="absolute right-4 top-4 active:animate-ping active:scale-80 duration-200"
         >
             <img
                 :src="
@@ -33,7 +33,8 @@ const addToFavoriteHandler = (product: Product) => {
         <img
             :src="product.thumbnail"
             :alt="product.title"
-            class="w-fit bg-gray-100 rounded-lg"
+            class="w-fit rounded-lg"
+            :class="{ 'bg-gray-100': product.reviews }"
             loading="lazy"
         />
         <span class="text-green-600 font-semibold">
@@ -44,7 +45,7 @@ const addToFavoriteHandler = (product: Product) => {
         >
             {{ product.description }}
         </span>
-        <div class="flex gap-2">
+        <div v-if="product.reviews" class="flex gap-2">
             <span>
                 <span class="text-yellow-400">★ </span>
                 {{ product.rating }}
