@@ -33,7 +33,7 @@ const handleClearFavorite = () => {
                 <ProductCard
                     v-for="product in favoriteStore.favoriteList"
                     :product="product"
-                ></ProductCard>
+                />
             </div>
         </div>
         <div

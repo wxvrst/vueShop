@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import type { User } from "@/types/types.ts";
 import Button from "@/components/ui/Button.vue";
 

@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-import { ref, computed } from "vue";
 import { watchDebounced } from "@vueuse/core";
 import type { Product, Category, Params, FetchParams } from "@/types/types";
 import { apiProduct } from "@/services/api";
@@ -63,6 +61,10 @@ export const useProductStore = defineStore(
         });
         products.value = response.data.products;
         totalProducts.value = response.data.total;
+
+        // Для более симпатичной подгрузки ?
+        // await new Promise((resolve) => setTimeout(resolve, 250));
+        
       } catch (err) {
         error.value = (err as Error).message;
         products.value = [];
@@ -122,7 +124,7 @@ export const useProductStore = defineStore(
         order: "asc",
       };
     };
-    
+
     const setCategory = (category: string) => {
       params.value = {
         ...params.value,

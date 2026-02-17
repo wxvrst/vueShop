@@ -1,4 +1,3 @@
-import { createRouter, createWebHistory } from "vue-router";
 import { useUsersStore } from "@/store/users";
 import { routes } from "./routes/routes.ts";
 import { useProductStore } from "@/store/products.ts";

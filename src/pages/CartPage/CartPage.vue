@@ -29,7 +29,7 @@ const handleClearCart = () => {
                     v-for="product in cartStore.cartList"
                     :key="product.id"
                     :product="product"
-                ></CartCard>
+                />
             </div>
         </div>
         <div

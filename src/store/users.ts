@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
 import type { User } from "@/types/types";
 import { apiUser } from "@/services/api";
 export const useUsersStore = defineStore(
@@ -37,9 +35,9 @@ export const useUsersStore = defineStore(
   },
   {
     persist: {
-      pick: ['currentUser'],
+      pick: ["currentUser"],
       storage: sessionStorage,
-      key: 'current-user'
-    }
+      key: "current-user",
+    },
   },
 );

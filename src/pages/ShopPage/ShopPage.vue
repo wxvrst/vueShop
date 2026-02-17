@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
 import { useProductStore } from "@/store/products";
 import ProductCard from "@/components/ui/ProductCard.vue";
 import Button from "@/components/ui/Button.vue";
@@ -113,7 +112,7 @@ onMounted(() => {
             {{ category.name }}
         </button>
     </div>
-    <div class="flex gap-2 justify-center">
+    <div class="flex gap-2 justify-center mb-6">
         <button
             v-for="(sort, index) in sortByList"
             @click="handleSortChange(sort)"
@@ -127,13 +126,21 @@ onMounted(() => {
             {{ sort.name }}
         </button>
     </div>
-    <section class="grid grid-cols-5 gap-4">
-        <p v-if="productStore.isLoading">Products loading...</p>
+    <img
+        v-if="productStore.isLoading"
+        src="@/public/progress_activity_icon.svg"
+        alt="loading icon"
+        class="py-4 mx-auto w-36 animate-spin"
+    />
+    <section
+        v-else
+        class="grid grid-cols-5 gap-4 transition-transform duration-400"
+    >
         <ProductCard
             v-for="product in productStore.products"
             :product="product"
             :key="product.id"
-        ></ProductCard>
+        />
     </section>
     <div class="flex justify-center gap-48 mt-8">
         <Button

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
 import { useProductStore } from "@/store/products";
-import { useRoute } from "vue-router";
 import Button from "@/components/ui/Button.vue";
 import { useCartStore } from "@/store/cart";
 
@@ -16,8 +14,8 @@ const handleAddToCart = () => {
     }
 };
 const handleOrderNow = () => {};
-onMounted(async () => {
-    await productStore.fetchProduct(Number(route.params.id));
+onMounted(() => {
+    productStore.fetchProduct(Number(route.params.id));
 });
 </script>
 <template>

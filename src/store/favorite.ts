@@ -1,6 +1,4 @@
-import { defineStore } from "pinia";
 import type { Product } from "@/types/types";
-import { computed, ref } from "vue";
 
 export const useFavoriteStore = defineStore(
   "favorite",

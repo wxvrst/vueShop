@@ -3,6 +3,7 @@ import type { Product } from "@/types/types";
 import { useFavoriteStore } from "@/store/favorite";
 import favoriteTrue from "@/public/favorite_icon_1.svg";
 import favoriteFalse from "@/public/favorite_icon_0.svg";
+
 const props = defineProps<{
     product: Product;
 }>();
@@ -16,9 +17,9 @@ const addToFavoriteHandler = (product: Product) => {
         class="relative flex flex-col rounded justify-between cursor-pointer gap-2 text-left group"
         :to="{ name: 'product', params: { id: product.id } }"
     >
-        <button 
+        <button
             @click.stop.prevent="addToFavoriteHandler(product)"
-            class="mr-6 absolute right-2 top-4 active:animate-ping active:scale-80 duration-200"
+            class="mr-4 absolute right-2 top-4 active:animate-ping active:scale-80 duration-200"
         >
             <img
                 :src="
@@ -32,7 +33,7 @@ const addToFavoriteHandler = (product: Product) => {
         <img
             :src="product.thumbnail"
             :alt="product.title"
-            class="w-fit"
+            class="w-fit bg-gray-100 rounded-lg"
             loading="lazy"
         />
         <span class="text-green-600 font-semibold">
@@ -40,8 +41,9 @@ const addToFavoriteHandler = (product: Product) => {
         >
         <span
             class="line-clamp-3 group-hover:text-blue-800 transition-colors duration-200"
-            >{{ product.description }}</span
         >
+            {{ product.description }}
+        </span>
         <div class="flex gap-2">
             <span>
                 <span class="text-yellow-400">★ </span>

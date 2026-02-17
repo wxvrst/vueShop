@@ -7,15 +7,27 @@ axios
 Пагинация
 Сортировка
 Пересобрал store
+Настройка конфигов:
+  vite.config.ts
+  eslint.config.ts
+  tailwind.config.ts ?
 Вложенные маршруты
 Динамические импорты
 Динамические маршруты
 
 **TODO:**
 FSD архитектура и архитектура внутри файлов
-Разобраться с сортировкой, с тем, что не выводит initialState после смены страницы на product/:id, **Search URL Query**
+Search URL Query
+<Transition></Transition> для анимаций
 
 **Hotkeys:**
 Ctrl+E поиск файлов,
 Ctrl+(Shift)+H поиск с заменой  
-Ctrl+(Shitf)+F поиск 
+Ctrl+(Shitf)+F поиск
+Ctrl+L выделить строку
+Ctrl+J открыть cmd
+Ctrl+/ закомментировать выделенное
+Ctrl+D выделение слова на курсоре
+
+Alt+(Shift)Up/Down перемещение(дублирование) строки
+Shift+Delete удаление строки
