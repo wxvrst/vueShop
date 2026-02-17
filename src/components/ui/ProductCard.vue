@@ -14,7 +14,7 @@ const addToFavoriteHandler = (product: Product) => {
 </script>
 <template>
     <router-link
-        class="relative flex flex-col rounded justify-between cursor-pointer gap-2 text-left group"
+        class="relative flex flex-col rounded justify-between cursor-pointer gap-2 text-left group hover:animate-pulse"
         :to="{ name: 'product', params: { id: product.id } }"
     >
         <button
