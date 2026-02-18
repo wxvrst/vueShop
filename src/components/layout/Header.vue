@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import image1 from "@/public/favorite_icon.svg";
+import image2 from "@/public/profile_icon.svg";
+import image3 from "@/public/cart_icon.svg";
 const links = [
     {
         title: "ALL PRODUCTS",
@@ -17,10 +20,27 @@ const links = [
         href: "/support",
     },
 ];
+const linkIcons = [
+    {
+        title: "Favorite",
+        icon: image1,
+        href: "/favorite",
+    },
+    {
+        title: "Profile",
+        icon: image2,
+        href: "/profile",
+    },
+    {
+        title: "Cart",
+        icon: image3,
+        href: "/cart",
+    },
+];
 </script>
 <template>
-    <header class="flex justify-between w-full my-4">
-        <router-link to="/main">
+    <header class="flex justify-between w-full my-6 items-center">
+        <router-link to="/main" class="w-60">
             <img src="@/public/logo.svg" alt="logo" />
         </router-link>
         <div class="flex gap-8">
@@ -33,23 +53,15 @@ const links = [
                 {{ link.title }}
             </router-link>
         </div>
-        <div class="flex gap-4 items-center justify-center w-42.5">
-            <router-link to="/favorite">
-                <img
-                    src="@/public/favorite_icon.svg"
-                    alt="favorite icon"
-                    class="w-7"
-                />
-            </router-link>
-            <router-link to="/profile">
-                <img
-                    src="@/public/profile_icon.svg"
-                    alt="profile icon"
-                    class="w-7"
-                />
-            </router-link>
-            <router-link to="/cart">
-                <img src="@/public/cart_icon.svg" alt="cart icon" />
+        <div class="flex gap-6 items-center justify-center w-fit">
+            <router-link
+                v-for="(item, index) in linkIcons"
+                :to="item.href"
+                :key="index"
+                class="flex flex-col items-center group w-16"
+            >
+                <img :src="item.icon" :alt="item.title" />
+                <span class="group-hover:text-black/50">{{ item.title }}</span>
             </router-link>
         </div>
     </header>

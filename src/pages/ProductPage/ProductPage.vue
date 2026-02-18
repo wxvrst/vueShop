@@ -1,13 +1,28 @@
 <script setup lang="ts">
 import { useProductStore } from "@/store/products";
-import Button from "@/components/ui/Button.vue";
 import { useCartStore } from "@/store/cart";
+import Button from "@/components/ui/Button.vue";
 import ReviewCard from "@/components/ui/ReviewCard.vue";
+import Modal from "@/components/ui/Modal.vue";
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
 const route = useRoute();
 
+const isModalOpen = ref<boolean>(false);
+const modalImage = ref<string | null>(null);
+const isScaled = ref<boolean>(false);
+const toggleScale = () => {
+    isScaled.value = !isScaled.value;
+};
+const handleToggleModal = (image?: string) => {
+    isModalOpen.value = !isModalOpen.value;
+    if (image) {
+        modalImage.value = image;
+    } else {
+        modalImage.value = null;
+    }
+};
 const currentProduct = computed(() => productStore.currentProduct);
 const handleAddToCart = () => {
     if (currentProduct.value) {
@@ -63,15 +78,26 @@ onMounted(() => {
         </div>
         <span class="text-left text-2xl">More images:</span>
         <div class="border-b border-gray-200 my-2" />
-        <div class="flex gap-2">
+        <div class="flex gap-2 relative">
             <img
                 v-for="(image, index) in currentProduct?.images"
                 :key="index"
                 :src="image"
                 alt="currentProduct.title"
-                class="w-48 bg-gray-100 rounded"
+                class="w-48 bg-gray-100 rounded cursor-pointer"
+                @click="handleToggleModal(image)"
             />
-            <!-- <img :src="image" alt="image modal" class="place-self-center" /> -->
+            <Modal :isOpen="isModalOpen" @close="handleToggleModal">
+                <!-- Можно попробовать сделать по индексу и добавить предыдущая/следующая -->
+                <img
+                    v-if="modalImage"
+                    :src="modalImage"
+                    alt="title"
+                    class="cursor-zoom-in flex bg-white/80 rounded-lg transition-transform duration-100"
+                    :class="{ 'scale-160 cursor-zoom-out': isScaled }"
+                    @click="toggleScale"
+                />
+            </Modal>
         </div>
         <span class="text-left text-2xl">Reviews:</span>
         <div class="border-b border-gray-200 my-2" />
