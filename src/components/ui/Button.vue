@@ -11,3 +11,4 @@ const emit = defineEmits<{
 		<slot>Click!</slot>
 	</button>
 </template>
+
