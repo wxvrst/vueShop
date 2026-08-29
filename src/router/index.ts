@@ -12,7 +12,7 @@ router.beforeEach(async (to) => {
 	}
 	if (to.path == "/") {
 		// Попробовать заменить на redirect
-		return { path: "/main" };
+		return { path: "/shop" };
 	}
 });
 router.afterEach(async (to, from) => {

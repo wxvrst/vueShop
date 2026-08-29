@@ -9,15 +9,18 @@ const links = [
     },
     {
         title: "SOLUTIONS",
-        href: "/solutions",
+        // href: "/solutions",
+        href: "/",
     },
     {
         title: "ABOUT",
-        href: "/about",
+        // href: "/about",
+        href: "/",
     },
     {
         title: "SUPPORT",
-        href: "/support",
+        // href: "/support",
+        href: "/",
     },
 ];
 const linkIcons = [
@@ -40,7 +43,7 @@ const linkIcons = [
 </script>
 <template>
     <header class="flex justify-between w-full my-6 items-center">
-        <router-link to="/main" class="w-60">
+        <router-link to="/" class="w-60">
             <img src="@/public/logo.svg" alt="logo" />
         </router-link>
         <div class="flex gap-8">

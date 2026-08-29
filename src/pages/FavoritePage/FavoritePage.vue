@@ -20,11 +20,20 @@ const handleClearFavorite = () => {
             <Button @click="handleClearFavorite"> Clear favorite </Button>
         </div>
         <div class="border-b border-gray-400"></div>
-        <div class="grid grid-cols-4 gap-4">
+        <div
+            class="grid grid-cols-4 gap-4"
+            v-if="favoriteStore.favoriteList.length"
+        >
             <ProductCard
                 v-for="product in favoriteStore.favoriteList"
                 :product="product"
             />
+        </div>
+        <div
+            v-else
+            class="w-full text-center text-4xl"
+        >
+            Its empty for now
         </div>
     </section>
 </template>

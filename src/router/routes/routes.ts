@@ -1,6 +1,6 @@
 export const routes = [
 	{
-		path: "/main",
+		path: "/",
 		name: "main",
 		component: () => import("@/pages/MainPage/MainPage.vue"),
 	},
