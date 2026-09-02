@@ -5,7 +5,7 @@ import image3 from "@/public/cart_icon.svg";
 const links = [
     {
         title: "ALL PRODUCTS",
-        href: "/shop",
+        href: "/",
     },
     {
         title: "SOLUTIONS",

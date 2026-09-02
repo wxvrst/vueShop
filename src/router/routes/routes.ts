@@ -2,7 +2,8 @@ export const routes = [
 	{
 		path: "/",
 		name: "main",
-		component: () => import("@/pages/MainPage/MainPage.vue"),
+		redirect: "/shop",
+		// component: () => import("@/pages/MainPage/MainPage.vue"),
 	},
 	{
 		path: "/shop",
@@ -45,7 +46,8 @@ export const routes = [
 			{
 				path: "",
 				name: "login",
-				component: () => import("@/pages/AuthPage/forms/AuthLoginForm.vue"),
+				component: () =>
+					import("@/pages/AuthPage/forms/AuthLoginForm.vue"),
 			},
 			{
 				path: "registration",
